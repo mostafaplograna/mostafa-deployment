@@ -30,11 +30,12 @@
                         <span class="h-badge status-badge" [ngClass]="{
                 'status-closed': overallData.status === 'Closed',
                 'status-active': overallData.status === 'Active',
-                'status-draft': overallData.status === 'Draft'
+                'status-draft': overallData.status === 'Draft',
+                'status-counted': overallData.status === 'Counted'
               }">
                             <span class="status-dot"></span>
                             {{ overallData.status === 'Closed' ? 'مغلقة' : overallData.status === 'Active' ? 'نشطة' :
-                            overallData.status === 'Draft' ? 'مسودة' : overallData.status }}
+                            overallData.status === 'Draft' ? 'مسودة' : overallData.status === 'Counted' ? 'تم الفرز' : overallData.status }}
                         </span>
                     </div>
                 </div>
@@ -222,7 +223,7 @@
                                 <!-- Avatar -->
                                 <div class="candidate-avatar-wrapper"
                                     [style.background]="candidateColors[i % candidateColors.length] + '18'">
-                                    <img [src]="imageBaseUrl + candidate.photoUrl" [alt]="candidate.candidateName"
+                                    <img [src]="getPhotoUrl(candidate.photoUrl)" [alt]="candidate.candidateName"
                                         class="candidate-avatar" />
                                     <span class="avatar-fallback"
                                         [style.color]="candidateColors[i % candidateColors.length]">{{

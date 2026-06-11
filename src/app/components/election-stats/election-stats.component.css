@@ -166,6 +166,15 @@
   background: #fbbf24;
 }
 
+.status-counted {
+  background: rgba(139, 92, 246, 0.85);
+}
+
+.status-counted .status-dot {
+  background: #c4b5fd;
+  box-shadow: 0 0 6px #c4b5fd;
+}
+
 @keyframes pulse-dot {
 
   0%,
@@ -1468,7 +1477,8 @@
   }
 
   .tab-btn span {
-    display: none;
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
 
   .glass-card {
@@ -1525,6 +1535,25 @@
   .gov-candidate-result {
     width: 100%;
     min-width: 0;
+  }
+
+  .result-numbers {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .gov-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .participation-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-btn {
+    padding: 9px 12px;
   }
 }
 

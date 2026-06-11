@@ -33,7 +33,7 @@ export class ElectionStatsComponent implements OnInit {
     '#224abe', '#10b981', '#f59e0b', '#ef4444',
     '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'
   ];
-  imageBaseUrl: string = 'http://localhost:5197';
+  imageBaseUrl: string = '';
 
   ngOnInit() {
     this.electionID = this.route.snapshot.params['id'];
@@ -86,6 +86,12 @@ export class ElectionStatsComponent implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  /** Smart photo URL builder - handles full URLs (Cloudinary) and relative paths */
+  getPhotoUrl(photoUrl: string): string {
+    if (!photoUrl) return '';
+    return photoUrl.startsWith('http') ? photoUrl : this.imageBaseUrl + photoUrl;
   }
 
   /** Get gender label in Arabic */
