@@ -183,35 +183,32 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// ===== Test Data Endpoints (Development Only) =====
-if (app.Environment.IsDevelopment())
+// ===== Test Data Endpoints =====
+app.MapGet("/seed-test-data", async (IServiceProvider sp) =>
 {
-    app.MapGet("/seed-test-data", async (IServiceProvider sp) =>
+    await TestDataSeeder.SeedTestDataAsync(sp);
+    return Results.Ok(new
     {
-        await TestDataSeeder.SeedTestDataAsync(sp);
-        return Results.Ok(new
+        message = "✅ Test data seeded! Created 3 elections (Presidential + Parliamentary + University) with 500 voters and ~970 encrypted votes.",
+        next_steps = new[]
         {
-            message = "✅ Test data seeded! Created 3 elections (Presidential + Parliamentary + University) with 500 voters and ~970 encrypted votes.",
-            next_steps = new[]
-            {
-                "1. Login as test organizer: POST /api/auth/login { email: 'testorg@securevote.com', password: 'Test@123456' }",
-                "2. Count presidential votes: POST /api/results/count/{electionId}",
-                "3. Count parliamentary votes: POST /api/results/count/{electionId}",
-                "4. Count university votes: POST /api/results/count/{electionId}",
-                "5. View results: GET /api/results/{electionId}",
-                "6. View by governorate: GET /api/results/{electionId}/by-governorate",
-                "7. View participation: GET /api/results/{electionId}/participation",
-                "8. Clean up: GET /clear-test-data"
-            }
-        });
+            "1. Login as test organizer: POST /api/auth/login { email: 'testorg@securevote.com', password: 'Test@123456' }",
+            "2. Count presidential votes: POST /api/results/count/{electionId}",
+            "3. Count parliamentary votes: POST /api/results/count/{electionId}",
+            "4. Count university votes: POST /api/results/count/{electionId}",
+            "5. View results: GET /api/results/{electionId}",
+            "6. View by governorate: GET /api/results/{electionId}/by-governorate",
+            "7. View participation: GET /api/results/{electionId}/participation",
+            "8. Clean up: GET /clear-test-data"
+        }
     });
+});
 
-    app.MapGet("/clear-test-data", async (IServiceProvider sp) =>
-    {
-        await TestDataSeeder.ClearTestDataAsync(sp);
-        return Results.Ok(new { message = "✅ Test data cleared successfully!" });
-    });
-}
+app.MapGet("/clear-test-data", async (IServiceProvider sp) =>
+{
+    await TestDataSeeder.ClearTestDataAsync(sp);
+    return Results.Ok(new { message = "✅ Test data cleared successfully!" });
+});
 
 app.Run();
 
