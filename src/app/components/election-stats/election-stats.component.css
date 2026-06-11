@@ -1526,8 +1526,8 @@
     align-items: center;
     position: relative;
     border-radius: 14px;
-    background: #fff;
-    border: 1px solid #e8edf6;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
   }
 
   .candidate-avatar-wrapper {
