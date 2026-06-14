@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://gp-deplyment-production-2207.up.railway.app'
+    apiUrl: 'https://gp-deployment-2-hazem-production.up.railway.app'
 };
