@@ -101,17 +101,11 @@ builder.Services.AddHttpClient("FaceRecognition", client =>
 var faceProvider = builder.Configuration["FaceRecognition:Provider"] ?? "Mock";
 switch (faceProvider)
 {
-    case "HuggingFace":
-        builder.Services.AddScoped<IFaceRecognitionService, HuggingFaceFaceRecognitionService>();
-        break;
-    case "Railway":
-        builder.Services.AddScoped<IFaceRecognitionService, RailwayFaceRecognitionService>();
-        break;
     case "FacePlusPlus":
         builder.Services.AddScoped<IFaceRecognitionService, FacePlusPlusFaceRecognitionService>();
         break;
-    default:
-        builder.Services.AddScoped<IFaceRecognitionService, MockFaceRecognitionService>();
+    default: // HuggingFace
+        builder.Services.AddScoped<IFaceRecognitionService, HuggingFaceFaceRecognitionService>();
         break;
 }
 
